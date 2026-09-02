@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://br0pwutxkcmpk"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_qs3pj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gvig"]
+size = Vector2(16, 24)
+
+[sub_resource type="GDScript" id="GDScript_ya0rp"]
+
+[node name="Player" type="CharacterBody2D"]
+modulate = Color(1, 0.647059, 0.913725, 1)
+script = ExtResource("1_qs3pj")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(48, 43)
+polygon = PackedVector2Array(-64, -75, -48, -75, -48, -75, -48, -51, -64, -51)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(1, 0.564706, 0.584314, 1)
+position = Vector2(-8, -20)
+shape = SubResource("RectangleShape2D_8gvig")
+script = SubResource("GDScript_ya0rp")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

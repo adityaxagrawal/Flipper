@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvvu7ragxpoo8"]
+
+[ext_resource type="Script" path="res://Scripts/spike.gd" id="1_1vhf7"]
+[ext_resource type="Texture2D" uid="uid://cr5rp8hgs6ft0" path="res://Sprites/Pink_triangle.svg-removebg-preview.png" id="1_x6os8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ncaj"]
+radius = 6.0
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_1wuhb"]
+length = 105.0
+
+[sub_resource type="Curve" id="Curve_m475s"]
+_data = [Vector2(0.0163043, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.234201), 0.44461, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0kmkp"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="HomingSpike" type="CharacterBody2D"]
+position = Vector2(0, -7)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_1vhf7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -3.14159
+scale = Vector2(0.0249221, 0.0302279)
+texture = ExtResource("1_x6os8")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_8ncaj")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.63027e-09, 9)
+rotation = 3.13871
+shape = SubResource("SeparationRayShape2D_1wuhb")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_m475s")
+hue_variation_min = -0.02
+hue_variation_max = 0.21
+hue_variation_curve = SubResource("Curve_0kmkp")
+
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

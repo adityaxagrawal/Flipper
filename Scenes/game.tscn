@@ -1,0 +1,708 @@
+[gd_scene load_steps=38 format=3 uid="uid://dq4mjuwbklcle"]
+
+[ext_resource type="PackedScene" uid="uid://dipt4l00h312u" path="res://Scenes/background.tscn" id="1_j8aqw"]
+[ext_resource type="PackedScene" uid="uid://bh2jiqw2knnmf" path="res://Scenes/player.tscn" id="1_jc24i"]
+[ext_resource type="PackedScene" uid="uid://baah2rvrq0q2q" path="res://Scenes/map.tscn" id="2_lkksn"]
+[ext_resource type="PackedScene" uid="uid://bsd7cyrwt2qla" path="res://Scenes/killzone.tscn" id="3_gupy2"]
+[ext_resource type="PackedScene" uid="uid://bb0ya8r0ck71c" path="res://Scenes/mega_spike.tscn" id="3_kehfi"]
+[ext_resource type="PackedScene" uid="uid://c5s6ak1jaq456" path="res://Scenes/flip_zone.tscn" id="4_vckbg"]
+[ext_resource type="PackedScene" uid="uid://d2f8x721xfnao" path="res://Scenes/spike.tscn" id="5_8jwxp"]
+[ext_resource type="Script" path="res://Scripts/camera_2d.gd" id="5_fehlf"]
+[ext_resource type="PackedScene" uid="uid://cvvu7ragxpoo8" path="res://Scenes/homing_spike.tscn" id="5_uy8j6"]
+[ext_resource type="Script" path="res://Scripts/checkpoints.gd" id="9_s7to7"]
+[ext_resource type="PackedScene" uid="uid://c5nbenfphn7u" path="res://Scenes/winner_winner_chicken_dinner.tscn" id="11_uw0va"]
+
+[sub_resource type="GDScript" id="GDScript_ousri"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iy03m"]
+normal = Vector2(0, 1)
+distance = -313.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eo8pe"]
+distance = -16.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5be7l"]
+a = Vector2(-1204, -355)
+b = Vector2(511.5, -345.5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nr37y"]
+a = Vector2(35, 0)
+b = Vector2(-36, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pnqad"]
+size = Vector2(50, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65746"]
+size = Vector2(50, 40.5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kxxun"]
+a = Vector2(69, 10)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sl2ph"]
+b = Vector2(41, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uhrcg"]
+b = Vector2(89, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_y25ep"]
+b = Vector2(71, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5wcdy"]
+a = Vector2(-44, 1)
+b = Vector2(84, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_880fo"]
+a = Vector2(-28, 1)
+b = Vector2(114, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6hs62"]
+a = Vector2(0, -23)
+b = Vector2(0, 20)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4pw57"]
+b = Vector2(42, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ahgvn"]
+a = Vector2(14, 1)
+b = Vector2(-30, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yrobo"]
+b = Vector2(0, 61)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_484ls"]
+b = Vector2(59, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qtwgl"]
+b = Vector2(52, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_faakp"]
+a = Vector2(355, 13)
+b = Vector2(-43, 12)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kugli"]
+a = Vector2(15, 1)
+b = Vector2(-13, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pfst6"]
+a = Vector2(363, 14)
+b = Vector2(325, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qqe3"]
+radius = 31.0161
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f3bxr"]
+radius = 54.037
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ry0lj"]
+radius = 23.0217
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfrma"]
+radius = 45.0444
+
+[node name="Game" type="Node2D"]
+script = SubResource("GDScript_ousri")
+
+[node name="Player" parent="." instance=ExtResource("1_jc24i")]
+position = Vector2(69, -104)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.2, 2.2)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+script = ExtResource("5_fehlf")
+
+[node name="Background" parent="Player/Camera2D" instance=ExtResource("1_j8aqw")]
+
+[node name="Timer" type="Timer" parent="Player/Camera2D"]
+
+[node name="Spikes" type="Node2D" parent="."]
+position = Vector2(280, -56)
+
+[node name="Spike" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-162, 27)
+
+[node name="Spike2" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-162, -75)
+rotation = -3.14159
+
+[node name="Spike3" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(18, -116)
+
+[node name="Spike5" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(369, -149)
+
+[node name="Spike6" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(386, -149)
+
+[node name="Spike7" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(401, -149)
+
+[node name="Spike8" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-32, -267)
+rotation = -3.14159
+
+[node name="Spike9" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(97, -229)
+
+[node name="Spike10" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-255, -229)
+
+[node name="Spike4" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-96, -315)
+rotation = 3.14159
+
+[node name="HomingSpike" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(353, -157)
+
+[node name="Spike11" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-7, -155)
+rotation = -3.14159
+
+[node name="Spike13" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(187, -126)
+rotation = -1.57079
+
+[node name="Spike13" parent="Spikes/Spike13" instance=ExtResource("5_8jwxp")]
+position = Vector2(-14, -3.05176e-05)
+
+[node name="Spike14" parent="Spikes/Spike13" instance=ExtResource("5_8jwxp")]
+position = Vector2(-28, -6.10352e-05)
+
+[node name="Spike12" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(117, -99)
+rotation = 1.57079
+
+[node name="Spike13" parent="Spikes/Spike12" instance=ExtResource("5_8jwxp")]
+position = Vector2(-14, -3.05176e-05)
+
+[node name="Spike14" parent="Spikes/Spike12" instance=ExtResource("5_8jwxp")]
+position = Vector2(-28, -6.10352e-05)
+
+[node name="Spike18" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(111, 69)
+rotation = -3.14155
+
+[node name="Spike14" parent="Spikes/Spike18" instance=ExtResource("5_8jwxp")]
+position = Vector2(-14, 6.19888e-05)
+
+[node name="Spike19" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(125, 27)
+rotation = 2.6528e-05
+
+[node name="Spike14" parent="Spikes/Spike19" instance=ExtResource("5_8jwxp")]
+position = Vector2(-14, 6.19888e-05)
+
+[node name="Spike17" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(83, 69)
+rotation = -3.14158
+
+[node name="Spike14" parent="Spikes/Spike17" instance=ExtResource("5_8jwxp")]
+position = Vector2(-14, 6.19888e-05)
+
+[node name="Spike16" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(97, 27)
+
+[node name="Spike14" parent="Spikes/Spike16" instance=ExtResource("5_8jwxp")]
+position = Vector2(-14, 6.19888e-05)
+
+[node name="Spike15" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(55, 69)
+rotation = -3.14159
+
+[node name="Spike14" parent="Spikes/Spike15" instance=ExtResource("5_8jwxp")]
+position = Vector2(-14, 6.19888e-05)
+
+[node name="Spike14" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(55, 27)
+
+[node name="Spike15" parent="Spikes/Spike14" instance=ExtResource("5_8jwxp")]
+position = Vector2(14, 0)
+
+[node name="Spike20" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-130, -597)
+
+[node name="Spike21" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-62, -597)
+
+[node name="HomingSpike2" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(419, -1069)
+
+[node name="HomingSpike3" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(684, -1070)
+
+[node name="HomingSpike4" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(271, -1282)
+rotation = 3.14159
+
+[node name="HomingSpike5" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(546, -1282)
+rotation = 3.14159
+
+[node name="Spike22" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-144, -443)
+rotation = -3.14159
+
+[node name="Spike23" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-48, -443)
+rotation = 3.14159
+
+[node name="Spike24" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-96, -1227)
+rotation = 3.14159
+
+[node name="Spike25" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(240, -1077)
+
+[node name="Spike26" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(50, -1124)
+
+[node name="Spike27" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(353, -1131)
+rotation = 3.14159
+
+[node name="Spike28" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(480, -1220)
+
+[node name="Spike30" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(608, -1131)
+rotation = 3.14159
+
+[node name="Spike31" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(873, -1061)
+
+[node name="Spike32" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(751, -1060)
+
+[node name="HomingSpike6" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1184, -1150)
+
+[node name="HomingSpike7" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1072, -1043)
+rotation = -3.14159
+
+[node name="HomingSpike8" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1264, -1123)
+rotation = -3.14159
+
+[node name="HomingSpike9" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1424, -1123)
+rotation = -3.14159
+
+[node name="HomingSpike10" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1344, -1149)
+
+[node name="HomingSpike11" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1536, -1246)
+
+[node name="Spike33" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1264, -1141)
+
+[node name="Spike34" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1424, -1141)
+
+[node name="Spike35" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1184, -1132)
+rotation = 3.14159
+
+[node name="Spike36" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1344, -1131)
+rotation = -3.14159
+
+[node name="Spike37" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1721, -1140)
+
+[node name="Spike38" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1849, -1141)
+
+[node name="Spike39" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1658, -1243)
+rotation = 3.14159
+
+[node name="Spike40" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1785, -1244)
+rotation = 3.14159
+
+[node name="MegaSpike" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(1079, 8)
+rotation = 1.57079
+
+[node name="Spike41" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1874, 59)
+
+[node name="Spike42" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1754, 61)
+
+[node name="Spike43" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1648, 60)
+
+[node name="Spike44" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1542, 59)
+
+[node name="Spike45" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1488, -43)
+rotation = 3.14159
+
+[node name="Spike46" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1599, -43)
+rotation = 3.14159
+
+[node name="Spike47" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1704, -43)
+rotation = 3.14159
+
+[node name="Spike48" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1818, -44)
+rotation = 3.14159
+
+[node name="HomingSpike14" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1407, -94)
+
+[node name="HomingSpike15" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(1227, -94)
+
+[node name="Spike49" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(761, 59)
+
+[node name="Spike50" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(637, 43)
+
+[node name="Spike53" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(623, -44)
+rotation = -3.14159
+
+[node name="Spike52" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(575, -60)
+rotation = -3.14159
+
+[node name="Spike54" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(526, -75)
+rotation = -3.14159
+
+[node name="Spike55" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(480, -91)
+rotation = -3.14159
+
+[node name="Spike51" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(449, -107)
+rotation = -3.14159
+
+[node name="MegaSpike11" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(1065, -144)
+rotation = -1.57079
+scale = Vector2(0.200207, 0.200207)
+
+[node name="MegaSpike10" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(1017, -128)
+rotation = -1.57079
+scale = Vector2(0.20623, 0.20623)
+
+[node name="MegaSpike9" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(969, -112)
+rotation = -1.57079
+scale = Vector2(0.212436, 0.212436)
+
+[node name="MegaSpike8" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(921, -95)
+rotation = -1.57079
+scale = Vector2(0.218827, 0.218827)
+
+[node name="MegaSpike7" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(873, -79)
+rotation = -1.57079
+scale = Vector2(0.225411, 0.225411)
+
+[node name="MegaSpike6" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(825, -63)
+rotation = -1.57079
+scale = Vector2(0.232194, 0.232194)
+
+[node name="MegaSpike12" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(503, -97)
+rotation = 1.57079
+scale = Vector2(0.23918, 0.23918)
+
+[node name="MegaSpike5" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(599, -64)
+rotation = 1.57079
+scale = Vector2(0.225411, 0.225411)
+
+[node name="MegaSpike4" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(552, -81)
+rotation = 1.57079
+scale = Vector2(0.232194, 0.232194)
+
+[node name="MegaSpike2" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(472, -113)
+rotation = 1.57079
+scale = Vector2(0.23918, 0.23918)
+
+[node name="MegaSpike3" parent="Spikes" instance=ExtResource("3_kehfi")]
+position = Vector2(1113, -158)
+rotation = -1.57079
+scale = Vector2(0.194359, 0.194359)
+
+[node name="Spike56" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(655, -37)
+
+[node name="Spike57" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(669, -37)
+
+[node name="Spike58" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(683, -37)
+
+[node name="Spike59" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(697, -37)
+
+[node name="Spike60" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(711, -37)
+
+[node name="Spike61" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(725, -37)
+
+[node name="Spike62" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(739, -37)
+
+[node name="Spike63" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(754, -37)
+
+[node name="Spike64" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(769, -37)
+
+[node name="Spike65" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(608, -283)
+rotation = 3.14159
+
+[node name="Spike69" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(736, -251)
+rotation = -3.14159
+
+[node name="Spike71" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(468, -319)
+rotation = 1.57079
+
+[node name="Spike72" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(532, -193)
+rotation = 1.57079
+
+[node name="Spike73" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(363, -320)
+rotation = -1.57079
+
+[node name="Spike74" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-273, -555)
+rotation = -3.14159
+
+[node name="Spike75" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(81, -555)
+rotation = 3.14159
+
+[node name="Spike76" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-187, -512)
+rotation = 1.57079
+
+[node name="Spike77" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(-5, -512)
+rotation = -1.57079
+
+[node name="Spike78" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1600, -85)
+
+[node name="Spike79" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1434, 59)
+
+[node name="Spike80" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1936, -1109)
+
+[node name="Spike81" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1984, -1109)
+
+[node name="Spike86" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1936, -229)
+
+[node name="Spike87" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1985, -229)
+
+[node name="Spike88" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1936, -453)
+
+[node name="Spike89" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1985, -453)
+
+[node name="Spike90" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1936, -677)
+
+[node name="Spike91" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1984, -677)
+
+[node name="Spike92" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1936, -731)
+rotation = 3.14159
+
+[node name="Spike93" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1984, -732)
+rotation = 3.14159
+
+[node name="Spike94" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1936, -507)
+rotation = -3.14159
+
+[node name="Spike95" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1985, -507)
+rotation = -3.14159
+
+[node name="Spike96" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1936, -283)
+rotation = 3.14159
+
+[node name="Spike97" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1985, -283)
+rotation = -3.14159
+
+[node name="Spike82" parent="Spikes" instance=ExtResource("5_8jwxp")]
+position = Vector2(1382, -43)
+rotation = -3.14159
+
+[node name="Map" parent="." instance=ExtResource("2_lkksn")]
+
+[node name="KillZones" parent="." instance=ExtResource("3_gupy2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZones"]
+position = Vector2(177, -1322)
+shape = SubResource("WorldBoundaryShape2D_iy03m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KillZones"]
+position = Vector2(192, 144)
+shape = SubResource("WorldBoundaryShape2D_eo8pe")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="KillZones"]
+position = Vector2(1563, -320)
+shape = SubResource("SegmentShape2D_5be7l")
+
+[node name="FlipZones" parent="." instance=ExtResource("4_vckbg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(184, -8)
+shape = SubResource("SegmentShape2D_nr37y")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(-63, -79.5)
+shape = SubResource("RectangleShape2D_pnqad")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(433, -166)
+shape = SubResource("RectangleShape2D_65746")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(151, -240)
+shape = SubResource("SegmentShape2D_kxxun")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(20, -326)
+shape = SubResource("SegmentShape2D_sl2ph")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(838, -223)
+shape = SubResource("SegmentShape2D_uhrcg")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1035, -311)
+shape = SubResource("SegmentShape2D_y25ep")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(789, -343)
+shape = SubResource("SegmentShape2D_5wcdy")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(141, -470)
+shape = SubResource("SegmentShape2D_880fo")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(182, -504)
+rotation = 1.57079
+shape = SubResource("SegmentShape2D_6hs62")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(165, -651)
+shape = SubResource("SegmentShape2D_4pw57")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(191, -1161)
+shape = SubResource("SegmentShape2D_ahgvn")
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1023, -1342)
+shape = SubResource("SegmentShape2D_yrobo")
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(895, -1182)
+shape = SubResource("SegmentShape2D_yrobo")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(767, -1342)
+shape = SubResource("SegmentShape2D_yrobo")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(639, -1182)
+shape = SubResource("SegmentShape2D_yrobo")
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1366, -1110)
+shape = SubResource("SegmentShape2D_484ls")
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1640, -1193)
+shape = SubResource("SegmentShape2D_qtwgl")
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1560, -1193)
+shape = SubResource("SegmentShape2D_qtwgl")
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1480, -1193)
+shape = SubResource("SegmentShape2D_qtwgl")
+
+[node name="CollisionShape2D22" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1727, -1193)
+shape = SubResource("SegmentShape2D_qtwgl")
+
+[node name="CollisionShape2D24" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1947, -1274)
+shape = SubResource("SegmentShape2D_faakp")
+
+[node name="CollisionShape2D23" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(2239, -114)
+shape = SubResource("SegmentShape2D_kugli")
+
+[node name="CollisionShape2D25" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(1897, -61)
+shape = SubResource("SegmentShape2D_pfst6")
+
+[node name="Checkpoints" type="Area2D" parent="."]
+position = Vector2(1563, -320)
+script = ExtResource("9_s7to7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints"]
+position = Vector2(-1127, 28)
+shape = SubResource("CircleShape2D_4qqe3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Checkpoints"]
+position = Vector2(-1285, -908)
+shape = SubResource("CircleShape2D_f3bxr")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Checkpoints"]
+position = Vector2(677, -811)
+shape = SubResource("CircleShape2D_ry0lj")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Checkpoints"]
+position = Vector2(-1275, -120)
+shape = SubResource("CircleShape2D_yfrma")
+
+[node name="WinnerWinnerChickenDinner" parent="." instance=ExtResource("11_uw0va")]
+position = Vector2(500, -76)
+scale = Vector2(0.423497, 0.423497)
+
+[node name="Spike" parent="." instance=ExtResource("5_8jwxp")]
+position = Vector2(1016, -1277)
+
+[connection signal="timeout" from="Player/Camera2D/Timer" to="Player/Camera2D" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Checkpoints" to="Checkpoints" method="_on_body_entered"]

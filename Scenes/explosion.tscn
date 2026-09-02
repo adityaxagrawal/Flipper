@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn35ea3u5iwv7"]
+
+[sub_resource type="GDScript" id="GDScript_h86f8"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+"
+
+[sub_resource type="Curve" id="Curve_4qwbk"]
+_data = [Vector2(0, 0.977695), 0.0, 0.0, 0, 0, Vector2(0.972826, 0), 0.380008, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ylx3w"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Explosion" type="Node2D"]
+script = SubResource("GDScript_h86f8")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 150
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_4qwbk")
+hue_variation_min = -0.11
+hue_variation_curve = SubResource("Curve_ylx3w")

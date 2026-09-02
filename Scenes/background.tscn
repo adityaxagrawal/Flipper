@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dipt4l00h312u"]
+
+[ext_resource type="Script" path="res://Scripts/background.gd" id="1_63g04"]
+
+[sub_resource type="Curve" id="Curve_cvfjq"]
+_data = [Vector2(0.0706522, 1), 0.0, -2.85006, 0, 0, Vector2(1, 0.063197), -0.095002, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_v66l2"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Background" type="Node2D"]
+script = ExtResource("1_63g04")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 100
+lifetime = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(300, 200)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+scale_amount_min = 8.0
+scale_amount_max = 12.0
+scale_amount_curve = SubResource("Curve_cvfjq")
+color = Color(1, 0.643137, 1, 1)
+hue_variation_min = -0.2
+hue_variation_max = 0.1
+hue_variation_curve = SubResource("Curve_v66l2")

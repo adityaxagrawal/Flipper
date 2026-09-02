@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://bv5cs763qgphi"]
+
+[ext_resource type="PackedScene" uid="uid://br0pwutxkcmpk" path="res://Scenes/player.tscn" id="1_jc24i"]
+[ext_resource type="PackedScene" uid="uid://i625fue6kqbg" path="res://Scenes/map.tscn" id="2_lkksn"]
+[ext_resource type="PackedScene" uid="uid://bsd7cyrwt2qla" path="res://Scenes/killzone.tscn" id="3_gupy2"]
+[ext_resource type="PackedScene" uid="uid://c5s6ak1jaq456" path="res://Scenes/flip_zone.tscn" id="4_vckbg"]
+[ext_resource type="PackedScene" uid="uid://cvvu7ragxpoo8" path="res://Scenes/homing_spike.tscn" id="5_uy8j6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iy03m"]
+normal = Vector2(0, 1)
+distance = -16.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eo8pe"]
+distance = -16.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nr37y"]
+a = Vector2(24, 0)
+b = Vector2(-24, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pnqad"]
+size = Vector2(50, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65746"]
+size = Vector2(50, 1)
+
+[node name="Game" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("2_lkksn")]
+
+[node name="Camera2D" type="Camera2D" parent="Map"]
+position = Vector2(184, -72)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+
+[node name="Player" parent="." instance=ExtResource("1_jc24i")]
+position = Vector2(48, -96)
+
+[node name="KillZones" parent="." instance=ExtResource("3_gupy2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZones"]
+position = Vector2(192, -368)
+shape = SubResource("WorldBoundaryShape2D_iy03m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KillZones"]
+position = Vector2(192, 144)
+shape = SubResource("WorldBoundaryShape2D_eo8pe")
+
+[node name="FlipZones" parent="." instance=ExtResource("4_vckbg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(184, -8)
+shape = SubResource("SegmentShape2D_nr37y")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(-63, -79.5)
+shape = SubResource("RectangleShape2D_pnqad")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="FlipZones"]
+position = Vector2(432, -80)
+shape = SubResource("RectangleShape2D_65746")
+
+[node name="Spikes" type="Node2D" parent="."]
+position = Vector2(280, -56)
+
+[node name="HomingSpike" parent="Spikes" instance=ExtResource("5_uy8j6")]
+position = Vector2(-169, -65)
+rotation = -3.14159

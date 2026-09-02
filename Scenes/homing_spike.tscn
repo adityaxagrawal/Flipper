@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvvu7ragxpoo8"]
+
+[ext_resource type="Script" path="res://Scripts/homing_spike.gd" id="1_1vhf7"]
+[ext_resource type="Texture2D" path="res://Sprites/Pink_triangle.svg-removebg-preview.png" id="1_x6os8"]
+[ext_resource type="PackedScene" uid="uid://y1or2dae2oqs" path="res://Scenes/explosion.tscn" id="3_xpwxp"]
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_1wuhb"]
+length = 241.002
+
+[node name="HomingSpike" type="CharacterBody2D"]
+position = Vector2(0, -7)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_1vhf7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8.9407e-08, -1)
+rotation = -3.14159
+scale = Vector2(0.0274356, 0.0303446)
+texture = ExtResource("1_x6os8")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+position = Vector2(0, -3)
+scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-8, 7, 0, -9, 8, 7)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.90735e-06, 6)
+rotation = 3.13871
+shape = SubResource("SeparationRayShape2D_1wuhb")
+
+[node name="Explosion" parent="." instance=ExtResource("3_xpwxp")]
+position = Vector2(0, -1)
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.8
+
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

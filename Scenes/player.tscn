@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bh2jiqw2knnmf"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_qs3pj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwqy6"]
+size = Vector2(18, 26)
+
+[sub_resource type="GDScript" id="GDScript_ya0rp"]
+
+[sub_resource type="Curve" id="Curve_6glwo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994565, 0.0334573), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Player" type="CharacterBody2D"]
+modulate = Color(1, 0.647059, 0.913725, 1)
+collision_layer = 3
+script = ExtResource("1_qs3pj")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(63, 71)
+scale = Vector2(1.125, 1.125)
+polygon = PackedVector2Array(-64, -75, -48, -75, -48, -75, -48, -51, -64, -51)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(1, 0.564706, 0.584314, 1)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_bwqy6")
+script = SubResource("GDScript_ya0rp")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.08
+one_shot = true
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_6glwo")
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5nbenfphn7u"]
+
+[ext_resource type="Texture2D" uid="uid://b2pqyl87p57j4" path="res://Sprites/download-removebg-preview.png" id="1_su1x4"]
+
+[node name="WinnerWinnerChickenDinner" type="Sprite2D"]
+texture = ExtResource("1_su1x4")

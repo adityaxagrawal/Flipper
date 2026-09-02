@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://domt3q4yu51b0"]
+
+[ext_resource type="AudioStream" uid="uid://ccwdnl740y53e" path="res://Sprites/Noise-Long-Version-chosic.com_.mp3" id="1_0dm0b"]
+
+[sub_resource type="GDScript" id="GDScript_81nth"]
+script/source = "extends AudioStreamPlayer
+
+
+func _ready() -> void:
+	if not playing:
+		play()
+	connect(\"finished\", Callable(self, \"_on_music_finished\"))
+
+func _on_music_finished():
+	play()
+	
+	
+"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_0dm0b")
+volume_db = -10.0
+autoplay = true
+script = SubResource("GDScript_81nth")
